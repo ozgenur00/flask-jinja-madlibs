@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Madlibs Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
+</head>
+<body>
+    <h1>Madlibs</h1>
+    <form action="/story" method="post">
+        <!-- Include a hidden field for the story code -->
+        <input type="hidden" name="story_code" value="{{ story.code }}">
+
+        <!-- Create form inputs for each prompt in the story -->
+        {% for prompt in story.prompts %}
+            <label for="{{prompt}}">{{ prompt|capitalize }}:</label>
+            <input type="text" id="{{prompt}}" name="{{prompt}}" required>
+            <br>
+        {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
